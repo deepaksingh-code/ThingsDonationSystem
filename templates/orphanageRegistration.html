@@ -1,0 +1,30 @@
+x{% extends 'home..html' %}
+{% load static %}
+{% block body_block %}
+    <div class="container-fluid" style="background-image: url({% static 'images/Orphanage-678x381.jpg' %}); background-repeat: no-repeat;background-size: cover; padding-top:50px;padding-bottom: 50px">
+        <div class="row">
+            <div class="col-lg-4 col-sm-12">
+            </div>
+            <div class="col-lg-4 col-sm-12" id="login" style="height: auto; background-color: rgba(255,255,255,0.2);color: white">
+                <h1 class="heading" style="text-align: center;font-family: Corbel;font-weight: bold" >Orphanage Registration</h1>
+                <form method="post" style="font-size: 25px" action="{% url 'oreg' %}">
+                    {% csrf_token %}
+                    <input type="text" name="name" class='form-control' placeholder="Orphanage's Name" style="border-radius: 25px;border: black 1px solid;height: 45px">
+                    <br>
+                    <input type="email" name="email" class="form-control" placeholder="Email" style="border-radius: 25px;border: black 1px solid;height: 45px"><br>
+                    <input type="number" name="mobileno" class="form-control" placeholder="Mobile No" style="border-radius: 25px;border: black 1px solid;height: 45px"><br>
+                    <input class="form-control" type="text" name="street" placeholder="streat no" style="border-radius: 25px;border: black 1px solid;height: 45px;"><br>
+                    <input class="form-control-sm" type="text" name="city" placeholder="City" style="border-radius: 25px;border: black 1px solid;height: 45px;">
+                    <input class="form-control-sm" type="text" name="district" placeholder="District" style="border-radius: 25px;border: black 1px solid;height: 45px;"><br><br>
+                    <input class="form-control" type='text' name="state" placeholder="State" style="border-radius: 25px;border: black 1px solid;height: 45px;"><br>
+                    <input class="form-control" type="number" name="pin" placeholder="PINCODE" style="border-radius: 25px;border: black 1px solid;height: 45px;"><br>
+                    <input type="file" name="image" class="form-control" placeholder="Image" style="border-radius: 25px;border: black 1px solid;height: 45px"><br>
+                    <input class="form-control" type="password" name="password" placeholder="***********" style="border-radius: 25px;border: black 1px solid;height: 45px;"><br>
+                    <input class="form-control" type="password" name="password2" placeholder="Confirm Password" style="border-radius: 25px;border: black 1px solid;height: 45px;"><br>
+                    <input class="btn btn-dark" type="submit" value="Register" style="height:50px;width: 100px;border: white 1px solid">
+                    <input class="btn" type="reset" value="Reset"  style="height:50px;width: 100px;border-radius: 10px;background-color: gray">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'home..html' %}
+{% load static %}
+{% block body_block %}
+    <div class="container-fluid" style="background-image: url({% static 'images/thingss=Donate.jpg' %}); background-repeat: no-repeat;background-size: cover; padding-top:50px;padding-bottom: 50px">
+        <div class="row">
+            <div class="col-lg-2 col-sm-12">
+            </div>
+            <div class="col-lg-8 col-sm-12" id="login" style="height: auto; background-color: rgba(255,255,255,0.2);color: white">
+                <h1 class="heading" style="text-align: center;font-family: Corbel;font-weight: bold;" >Make a Donation</h1>
+                <form method="post" style="font-size: 25px; color: black;" action="{% url 'thingdonate' %}">
+                    {% csrf_token %}
+                    <input type="text" id="donationForm" name="name" class="form-control" placeholder="Thing's Name">
+                    <br>
+                    <input type="text" id="donationForm" name="quantity" class="form-control" placeholder="Quantity"><br>
+                    <textarea class="form-control" rows = "3" cols = "30" name = "description" id="donationForm" style="height: auto">Write Description
+                     </textarea><br>
+                    <input type="number" name="mobileno" class="form-control" placeholder="Mobile No" id="donationForm"><br>
+                    <div style="border: 2px black solid;padding: 2px 2px 2px 2px">
+                        <p style="color: white;background-color: black;padding-bottom: 5px">Address of Thing: </p>
+                         {% for i in request.user.donator.thing_set.all %}
+                             <select class="form-control" name="address">
+                                    <option class="form-control" value="{{ i.address.id }}">{{ i.address }}</option>
+                             </select>
+                        {% endfor %}
+                        <input class="form-control" type="text" name="street" placeholder="streat no" id="donationForm">
+                        <input class="form-control-sm" type="text" name="city" placeholder="City" id="donationForm">
+                        <input class="form-control-sm" type="text" name="district" placeholder="District" id="donationForm"><br>
+                        <input class="form-control" type='text' name="state" placeholder="State" id="donationForm">
+                        <input class="form-control" type="number" name="pin" placeholder="PINCODE" id="donationForm">
+                    </div>
+                    <br>
+                    <label  for="images">Image</label>
+                    <input class="form-control-file" type="file" name="city" placeholder="Image" id="donationForm">
+                    <div class="form-group" id="donationForm" >
+                          <label for="sel1">Select Orphanage:</label>
+                          <select class="form-control" id="sel1" name="orphanage">
+                              {% for i in orp %}
+                            <option value="{{ i.id }}">{{ i.name }},{{ i.address }}</option>
+                              {% endfor %}
+                          </select>
+                    </div>
+                    <br>
+                    <input class="btn btn-dark" type="submit" value="Donate" style="height:50px;width: 100px;border: white 1px solid">
+                    <input class="btn" type="reset" value="Reset"  style="height:50px;width: 100px;border-radius: 10px;background-color: gray">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

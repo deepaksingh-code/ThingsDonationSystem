@@ -1,0 +1,26 @@
+
+{% extends 'home.html' %}
+{% load static %}
+{% block bodyblock %}
+    <div class="container-fluid" style="background-image: url({% static 'images/black3.jpg' %});padding-top:50px;padding-bottom: 50px">
+        <div class="row">
+            <div class="col-lg-4 col-sm-12">
+            </div>
+            <div class="col-lg-4 col-sm-12" id="login" style="height: 400px;border: black 2px solid;border-radius: 5%; background-color: rgba(255,255,255,0.2);color: white">
+                {% block form_block %}
+                <h1 style="text-align: center;font-family: Corbel;font-weight: bold" >Login Here</h1>
+                <form method="post" style="font-size: 25px" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <p style="color: red;font-size: 20px">{{ data }}</p>
+                    <label >User Name:</label><br>
+                    <input type="text" name="username" class="form-control" placeholder="username" style="border-radius: 25px;border: black 1px solid;height: 45px">
+                    <label>Password:</label><br>
+                    <input class="form-control" type="password" name="password" placeholder="***********" style="border-radius: 25px;border: black 1px solid;height: 45px;"><br>
+                    <input class="btn btn-dark" type="submit" value="Login" style="height:50px;width: 100px;border: white 1px solid">
+                    <input class="btn" type="reset" value="Reset"  style="height:50px;width: 100px;border-radius: 10px;background-color: gray">
+                </form>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

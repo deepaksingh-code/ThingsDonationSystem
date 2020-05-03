@@ -1,0 +1,83 @@
+{% extends 'home.html' %}
+{% block bodyblock %}
+        <div class="container" style="background-color: white;">
+            <div class="row">
+                <div class="col-12">
+                 {% if request.session.usertype == 'donator' %}
+                     <h1 style="background-color: black;text-align: center">Donator Profie</h1>
+
+                        <p>Username: {{ user.username }}</p>
+                        <p>Email: {{ user.email }}</p>
+                        <p>Donator's Name: {{ user.donator.name }}</p>
+                        <p>Donator's MobileNo: {{ user.donator.mobileno }}</p>
+                        <h1>List of things are donated by {{ user.donator.name }}</h1>
+                            <table border="1">
+                                <tr>
+                                    <th>Thing's Name</th>
+                                    <th>Quantity</th>
+                                    <th>Description</th>
+                                    <th>Address</th>
+                                    <th>Orphange</th>
+                                </tr>
+                                {% for i in user.donator.thing_set.all %}
+                                    <tr>
+                                        <td>{{ i.name }}</td>
+                                        <td>{{ i.quantity }}</td>
+                                        <td>{{ i.description }}</td>
+                                        <td>{{ i.address }}</td>
+                                        <td>{{ i.orphanage }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                    {% else %}
+
+                     <h1 style="background-color: black;text-align: center;color: white;font-family: Calibri; font-weight: bold;">Orphanage Profile</h1>
+                      <table class="table-borderless">
+                            <tr>
+                                <td><h2>Name: </h2></td>
+                                <td><h3>{{ user.orphanage.name }}</h3></td>
+                            </tr>
+                            <tr>
+                                <td><h2>Email: </h2></td>
+                                <td><h3>{{ user.email }}</h3></td>
+                            </tr>
+                            <tr>
+                                <td><h2>Mobile No.: </h2></td>
+                                <td><h3>{{ user.orphanage.mobileno }}</h3></td>
+                            </tr>
+                            <tr>
+                                <td><h2>Address: </h2></td>
+                                <td><h3>{{ user.orphanage.address.fullAddress }}</h3></td>
+                            </tr>
+                     </table>
+                     <h1 style="background-color: black;text-align: center;color: white;font-family: Calibri; font-weight: bold;">Things are received by {{ user.orphanage }}: </h1>
+                            <table class="table">
+                                <tr>
+                                    <th>Thing's name</th>
+                                    <th>Thing's Quantity</th>
+                                    <th>Thing's Description</th>
+                                    <th>Thing's Address</th>
+                                    <th>Donator Name</th>
+                                    <th>Time of Denote</th>
+                                    <th>Approval</th>
+                                </tr>
+                                {% for i in user.orphanage.thing_set.all %}
+                                    <tr>
+                                        <td>{{ i.name }}</td>
+                                        <td>{{ i.quantity }}</td>
+                                        <td>{{ i.description }}</td>
+                                        <td>{{ i.address }}</td>
+                                        <td>{{ i.donator.name }}</td>
+                                        <td>{{ i.time }}</td>
+                                        {% if not i.approval %}
+                                            <td><a class="btn btn-primary" style="background-color: green">Accept</a>
+                                                <a class="btn btn-danger">Cancel</a></td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                    {% endif %}
+                </div>
+          </div>
+        </div>
+{%  endblock %}
